@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name           Autoload - BS enhancer
+// @name           Autoload - BS enhancer (modified version of BETSLIX by xtrars)
 
 // @icon           https://bs.to/favicon.ico
 // @author         xtrars
 // @modifiedBy     FamousZsta5rs
 // @description:de Wechselt automatisch zum VOE- oder Streamtape-Tab auf burning series und öffnet VOE oder Streamtape. Das Tool startet das nächste Video und falls nötig die nächste Staffel, wenn eine Episode beendet wurde.
 // @description:en Automatically switches to the VOE or Streamtape tab on burning series and opens VOE or Streamtape. The tool starts the next video and if necessary the next season when an episode is finished.
-// @version        16.8
+// @version        17.0
 // @run-at         document-start
 // @license        GPL-3.0-or-later
 // @namespace      https://github.com/FamousZsta5rs
@@ -985,9 +985,9 @@ class CBurningSeriesHandler extends CBaseHandler {
             <div id="Info" class="xtrars-tabcontent" style="font-size: 11px;">
                 <div  class="xtrars-donation-container">
                     <div class="xtrars-donation-text">
-                        <span style="font-weight: bold;">Autoload - BS enhancer (modified version by FamousZsta5rs)</span> <br> 
+                        <span style="font-weight: bold;">Autoload - BS enhancer (modified version of BETSLIX by xtrars)</span> <br> 
                         Author: Du magst meine Arbeit und das Projekt erleichtert dir dein Streaming-Leben? 
-                        Dann gib mir doch ein leckeren Tee aus, denn so kann das Projekt immer weiter optimiert werden
+                        Dann gib mir doch ein leckeren Tee oder Kaffe aus, denn so kann das Projekt immer weiter optimiert werden
                         und am Leben bleiben:
                         <a class="xtrars-donate" href="https://paypal.me/betslix" 
                             target="_blank">Spenden</a>
