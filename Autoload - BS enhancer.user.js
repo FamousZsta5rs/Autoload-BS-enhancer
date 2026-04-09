@@ -29,7 +29,6 @@
 // @grant          window.focus
 
 // @match          https://bs.to/*
-// @match          https://aniworld.to/*
 
 // @match          https://doodstream.me/*
 // @match          https://*.playmogo.com/*
