@@ -986,10 +986,10 @@ class CBurningSeriesHandler extends CBaseHandler {
                 <div  class="xtrars-donation-container">
                     <div class="xtrars-donation-text">
                         <span style="font-weight: bold;">Autoload - BS enhancer (modified version by FamousZsta5rs)</span> <br> 
-                        Du magst meine Arbeit und das Projekt erleichtert dir dein Streaming-Leben? 
+                        Author: Du magst meine Arbeit und das Projekt erleichtert dir dein Streaming-Leben? 
                         Dann gib mir doch ein leckeren Kaffe aus, denn so kann das Projekt immer weiter optimiert werden
                         und am Leben bleiben:
-                        <a class="xtrars-donate" href="https://paypal.me/Marc484" 
+                        <a class="xtrars-donate" href="https://paypal.me/betslix" 
                             target="_blank">Spenden</a>
                         Danke dir :)
                     </div>
