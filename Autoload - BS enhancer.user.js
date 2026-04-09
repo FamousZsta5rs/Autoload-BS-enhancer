@@ -31,8 +31,7 @@
 // @match          https://bs.to/*
 // @match          https://aniworld.to/*
 
-// @match          https://dood.yt/*
-// @match          https://d0000d.com/*
+// @match          https://doodstream.me/*
 // @match          https://*.playmogo.com/*
 
 // @match          https://streamtape.com/*
@@ -2302,7 +2301,7 @@ await (async () => {
 
             },
             {
-                regex: /^(https:\/\/(d0000d|dood|playmogo)\.[a-z]{2,3}\/)/g,
+                regex: /^(https:\/\/playmogo)\.com\/.*)/g,
                 selector: '#os_player > iframe, #video_player_html5_api',
                 hoster: cBsHandler.getHoster(2, true),
             },
