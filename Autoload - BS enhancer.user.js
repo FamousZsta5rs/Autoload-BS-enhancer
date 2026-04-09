@@ -1950,10 +1950,20 @@ class CStreamingHandler extends CBaseHandler {
         document.body.style.overflow = "hidden";
         oVideo.requestFullscreen().catch(() => null);
 
-        oVideo.play().catch(() => {
-            // Autoplay wurde blockiert
-            this.showAutoplayWarning();
-        });
+oVideo.muted = true;
+oVideo.defaultMuted = true;
+oVideo.playsInline = true;
+oVideo.autoplay = true;
+
+oVideo.play().then(() => {
+    // optional: Ton nach Start wieder einschalten
+    setTimeout(() => {
+        oVideo.muted = false;
+    }, 1000);
+}).catch(() => {
+    // Autoplay wurde blockiert
+    this.showAutoplayWarning();
+});        
     }
 
     /**
@@ -1972,12 +1982,37 @@ class CStreamingHandler extends CBaseHandler {
                 window.addEventListener('load', async () => resolve(), false);
             });
 
-            let oClickEvent = new Event('click');
-            oClickEvent.which = 1;
-            oClickEvent.pageX = 6;
-            oClickEvent.pageY = 1;
-            (await this.waitForElement(oHoster.selector)).dispatchEvent(oClickEvent);
+            const btn = await this.waitForElement(oHoster.selector);
 
+// kompletter „Fake Klick“
+if (!btn.dataset.clicked) {
+    btn.dataset.clicked = "1";
+    
+btn.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true }));
+btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, button: 0 }));
+btn.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, button: 0 }));
+btn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 }));
+
+// fallback
+btn.click();
+}
+
+// optional kleiner Delay (wichtig!)
+const video = await this.waitForElement('video');
+
+await (async () => {
+    const start = Date.now();
+    while (Date.now() - start < 10000) {
+        if (
+            video &&
+            (video.currentSrc || video.src) &&
+            video.readyState >= 2
+        ) {
+            return;
+        }
+        await new Promise(r => setTimeout(r, 200));
+    }
+})();
             let oVideoElement = await this.waitForElement(oHoster.selector).catch(() => null);
 
             // Seite bereinigen
@@ -2248,7 +2283,7 @@ class CStreamingHandler extends CBaseHandler {
     if (GM_getValue('bActivateEnhancer')) {
         const aHoster = [
             {
-                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/jessicaclearout\.com\/.*)/g,
+                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/jefferycontrolmodel\.com\/.*)/g,
                 selector: 'video.jw-video',
                 hoster: cBsHandler.getHoster(0, true),
                 m3u8Regex: /(?<=sources = {([ \n]|.)*?hls': ')https:\/\/.*(?=',)/g,
