@@ -2029,6 +2029,9 @@ await (async () => {
             oVideoElement.controls = true;
             oVideoElement.preload = true;
             oVideoElement.autoplay = true;
+            oVideoElement.muted = true;
+            oVideoElement.defaultMuted = true;
+            oVideoElement.playsInline = true;
         } else if (oHoster.hoster === this.getHoster(1, true)) {
             await new Promise(resolve => {
                 document.addEventListener('DOMContentLoaded', () => resolve(), false);
@@ -2060,6 +2063,9 @@ await (async () => {
             oVideoElement.controls = true;
             oVideoElement.preload = true;
             oVideoElement.autoplay = true;
+            oVideoElement.muted = true;
+            oVideoElement.defaultMuted = true;
+            oVideoElement.playsInline = true;
         } else if (oHoster.hoster === this.getHoster(3, true)) {
             await new Promise(resolve => {
                 window.addEventListener('load', async () => {
