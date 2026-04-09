@@ -47,7 +47,7 @@
 // @require        https://unpkg.com/video.js@latest/dist/video.min.js
 // @require        https://unpkg.com/hls.js@latest/dist/hls.min.js
 
-// @downloadURL    
+// @downloadURL    https://github.com/FamousZsta5rs/Autoload-BS-enhancer/raw/refs/heads/main/Autoload%20-%20BS-enhancer.user.js
 // @updateURL      
 // ==/UserScript==
 
