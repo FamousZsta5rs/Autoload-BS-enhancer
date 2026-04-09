@@ -2248,7 +2248,7 @@ class CStreamingHandler extends CBaseHandler {
     if (GM_getValue('bActivateEnhancer')) {
         const aHoster = [
             {
-                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/jefferycontrolmodel\.com\/.*)/g,
+                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/jessicaclearout\.com\/.*)/g,
                 selector: 'video.jw-video',
                 hoster: cBsHandler.getHoster(0, true),
                 m3u8Regex: /(?<=sources = {([ \n]|.)*?hls': ')https:\/\/.*(?=',)/g,
