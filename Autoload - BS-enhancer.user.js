@@ -48,7 +48,7 @@
 // @require        https://unpkg.com/hls.js@latest/dist/hls.min.js
 
 // @downloadURL    https://github.com/FamousZsta5rs/Autoload-BS-enhancer/raw/refs/heads/main/Autoload%20-%20BS-enhancer.user.js
-// @updateURL      
+// @updateURL      https://github.com/FamousZsta5rs/Autoload-BS-enhancer/raw/refs/heads/main/Autoload%20-%20BS-enhancer.meta.js
 // ==/UserScript==
 
 
