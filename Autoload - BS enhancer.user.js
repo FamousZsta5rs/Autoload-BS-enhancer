@@ -30,6 +30,8 @@
 
 // @match          https://bs.to/*
 
+// @match          https://dood.yt/*
+// @match          https://d0000d.com/*
 // @match          https://doodstream.me/*
 // @match          https://*.playmogo.com/*
 
@@ -2297,7 +2299,6 @@ await (async () => {
                 selector: 'video.jw-video',
                 hoster: cBsHandler.getHoster(0, true),
                 m3u8Regex: /(?<=sources = {([ \n]|.)*?hls': ')https:\/\/.*(?=',)/g,
-
             },
             {
                 regex: /^(https:\/\/playmogo)\.com\/.*)/g,
