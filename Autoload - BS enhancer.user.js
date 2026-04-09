@@ -834,7 +834,7 @@ class CBurningSeriesHandler extends CBaseHandler {
         const oSettingsWindow = document.createElement("div");
         oSettingsWindow.innerHTML = `
             <div id="xtrars-settings-toolbar">
-                <div class="xtrars-toolbar-text">BETSLIX - Settings</div>
+                <div class="xtrars-toolbar-text">Autoload - Settings</div>
                 <button id="xtrars-settings-close-btn">✕</button>
                 
                 <div class="xtrars-search">
@@ -878,7 +878,7 @@ class CBurningSeriesHandler extends CBaseHandler {
                     </label>
                 </div>
   
-                <a href="https://update.greasyfork.org/scripts/429666/BETSLIX%20-%20burning%20series%20enhancer.user.js" rel="nofollow" class="tab xtrars-update-button">
+                <a href="https://raw.githubusercontent.com/FamousZsta5rs/Autoload-BS-enhancer/main/Autoload%20-%20BS%20enhancer.user.js" rel="nofollow" class="tab xtrars-update-button">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC40lEQVR4nO2Zy2oUQRSGSxPjdZOgwYjGN/ASkRAQ3LgwLsQRQdciivGyUBQvKAgJbhIwER9BRUVEEi/vIC4mKi4UI06MTLwhgia6+OTgCXSKms70TJVQ0h8MDNVT5++/e6rq1CljcnJycrIAzAc2A+eBO8Az4BMwDfwCvgCjwF3gDNApfUxogF3AJFAGdqb8rh3oBSbIzjugD1gV0sj7hOC443orcFWfeL1MAUNAcwgjs7Cu7QU+4p9JoBDcCNAIXEu5kW/ADeCAjpcVQBOwQL9L22HgIfAzJc4Q0BDECLAIeFRB+BWwH1iSIf5SoMf6Cye5DywMYWTE0fYDOCVvqg6dxTqLucbavXpiVzJi8xpYV5fIbL0umVQcOgMhjRRl1vJlIqG5Enjh0CuEfCMzjAHdHs2sdaxJH4CW0EaEki8jArBJ15Yk/SY2IwJw2dKQ6brNZCWDiTfA9swCc+svcwz+CyZGgOP2QzMxwt9sQDLnJOtNjAAPLCMnTIwAxywj102MAFssI09MjABrLCMTWTpv06z0M7Av6J1Wt4UuJ4wUs3R+mej41dveoEaA3Zq2SDq0NUtHO9dZbWIEeGoZ6TIxAty0jPSYGAFOWkaGTYwAGywjv0NspIIDzAPeWmaOmhgBLlpGSpJaB9DZodNqVdQi0OaoPfUFMOIqOFSkVpF+K45sPzs8G5E3XTWmRpEW3fgnkcWy3aORbt1lhjOiQgVHvOdSuvFlxioHjQYxogIDjpjjPld8YGM1g75ekUYtX9pImfNslpqvI7YUuc9VKGoPezWSEJTCsgsZN0ekMJ2xSnIwZXyMSBHbuxEVbwAGU968zGqP1VSnHgY16Q21atsh4DbwPSXO4EzxOogRawKQQxnflIE9llY4IyrQDFxxlDZrYUpjLXfojP2TupZOmb2O3KwaZDG8JPvyOdaZkn68VzQrJZpytHZaj6eLuuef1ic+qW239GCnQ/oEv7GcnJz/iz/Wmk6MdR/K1gAAAABJRU5ErkJggg==" alt="Update Icon" class="icon">
                     <span>Update</span>
                 </a>
@@ -985,7 +985,7 @@ class CBurningSeriesHandler extends CBaseHandler {
             <div id="Info" class="xtrars-tabcontent" style="font-size: 11px;">
                 <div  class="xtrars-donation-container">
                     <div class="xtrars-donation-text">
-                        <span style="font-weight: bold;">BETSLIX - burning series enhancer by xtrars</span> <br> 
+                        <span style="font-weight: bold;">Autoload - BS enhancer (modified version by FamousZsta5rs)</span> <br> 
                         Du magst meine Arbeit und das Projekt erleichtert dir dein Streaming-Leben? 
                         Dann gib mir doch ein leckeren Tee aus, denn so kann das Projekt immer weiter optimiert werden
                         und am Leben bleiben:
