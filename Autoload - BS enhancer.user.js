@@ -6,7 +6,7 @@
 // @modifiedBy     FamousZsta5rs
 // @description:de Wechselt automatisch zum VOE- oder Streamtape-Tab auf burning series und öffnet VOE oder Streamtape. Das Tool startet das nächste Video und falls nötig die nächste Staffel, wenn eine Episode beendet wurde.
 // @description:en Automatically switches to the VOE or Streamtape tab on burning series and opens VOE or Streamtape. The tool starts the next video and if necessary the next season when an episode is finished.
-// @version        16.7
+// @version        16.8
 // @run-at         document-start
 // @license        GPL-3.0-or-later
 // @namespace      https://github.com/FamousZsta5rs
@@ -987,9 +987,9 @@ class CBurningSeriesHandler extends CBaseHandler {
                     <div class="xtrars-donation-text">
                         <span style="font-weight: bold;">Autoload - BS enhancer (modified version by FamousZsta5rs)</span> <br> 
                         Du magst meine Arbeit und das Projekt erleichtert dir dein Streaming-Leben? 
-                        Dann gib mir doch ein leckeren Tee aus, denn so kann das Projekt immer weiter optimiert werden
+                        Dann gib mir doch ein leckeren Kaffe aus, denn so kann das Projekt immer weiter optimiert werden
                         und am Leben bleiben:
-                        <a class="xtrars-donate" href="https://paypal.me/betslix" 
+                        <a class="xtrars-donate" href="https://paypal.me/Marc484" 
                             target="_blank">Spenden</a>
                         Danke dir :)
                     </div>
@@ -1159,11 +1159,7 @@ class CBurningSeriesHandler extends CBaseHandler {
                 this.showTabContent(e.target.dataset.tab);
             });
         });
-        //
-        // oUpdate.addEventListener('click', () => {
-        //     window.open('https://update.greasyfork.org/scripts/429666/BETSLIX%20-%20burning%20series%20enhancer.user.js')
-        // })
-
+        
         // Öffne Settings
         !oButton || oButton.addEventListener('click', () => {
 
