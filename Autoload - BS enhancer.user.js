@@ -47,8 +47,8 @@
 // @require        https://unpkg.com/video.js@latest/dist/video.min.js
 // @require        https://unpkg.com/hls.js@latest/dist/hls.min.js
 
-// @downloadURL    https://raw.githubusercontent.com/FamousZsta5rs/Autoload-BS-enhancer/refs/heads/main/Autoload%20-%20BS-enhancer.user.js
-// @updateURL      https://raw.githubusercontent.com/FamousZsta5rs/Autoload-BS-enhancer/refs/heads/main/Autoload%20-%20BS-enhancer.meta.js
+// @downloadURL    https://raw.githubusercontent.com/FamousZsta5rs/Autoload-BS-enhancer/main/Autoload%20-%20BS%20enhancer.user.js
+// @updateURL      https://raw.githubusercontent.com/FamousZsta5rs/Autoload-BS-enhancer/main/Autoload%20-%20BS%20enhancer.meta.js
 // ==/UserScript==
 
 
