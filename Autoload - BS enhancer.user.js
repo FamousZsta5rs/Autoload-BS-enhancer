@@ -1948,6 +1948,7 @@ class CStreamingHandler extends CBaseHandler {
         document.body.style.margin = "0px";
         document.body.style.backgroundColor = "black";
         document.body.style.overflow = "hidden";
+
         oVideo.requestFullscreen().catch(() => null);
 
 oVideo.muted = true;
@@ -1964,6 +1965,13 @@ oVideo.play().then(() => {
     // Autoplay wurde blockiert
     this.showAutoplayWarning();
 });        
+        
+        /*oVideo.requestFullscreen().catch(() => null);
+
+        oVideo.play().catch(() => {
+            // Autoplay wurde blockiert
+            this.showAutoplayWarning();
+        }); */
     }
 
     /**
@@ -2289,7 +2297,7 @@ await (async () => {
     if (GM_getValue('bActivateEnhancer')) {
         const aHoster = [
             {
-                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/jefferycontrolmodel\.com\/.*)/g,
+                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/jessicaclearout\.com\/.*)/g,
                 selector: 'video.jw-video',
                 hoster: cBsHandler.getHoster(0, true),
                 m3u8Regex: /(?<=sources = {([ \n]|.)*?hls': ')https:\/\/.*(?=',)/g,
