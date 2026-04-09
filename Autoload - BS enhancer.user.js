@@ -6,7 +6,7 @@
 // @modifiedBy     FamousZsta5rs
 // @description:de Wechselt automatisch zum VOE- oder Streamtape-Tab auf burning series und öffnet VOE oder Streamtape. Das Tool startet das nächste Video und falls nötig die nächste Staffel, wenn eine Episode beendet wurde.
 // @description:en Automatically switches to the VOE or Streamtape tab on burning series and opens VOE or Streamtape. The tool starts the next video and if necessary the next season when an episode is finished.
-// @version        17.0
+// @version        17.1
 // @run-at         document-start
 // @license        GPL-3.0-or-later
 // @namespace      https://github.com/FamousZsta5rs
@@ -29,9 +29,11 @@
 // @grant          window.focus
 
 // @match          https://bs.to/*
+// @match          https://aniworld.to/*
 
 // @match          https://dood.yt/*
 // @match          https://d0000d.com/*
+// @match          https://*.playmogo.com/*
 
 // @match          https://streamtape.com/*
 // @match          https://streamadblocker.xyz/*
@@ -2300,7 +2302,7 @@ await (async () => {
 
             },
             {
-                regex: /^https:\/\/(dood)|(ds2play)|(d[0o]+d)\.[a-z]{2,3}\//g,
+                regex: /^(https:\/\/(d0000d|dood|playmogo)\.[a-z]{2,3}\/)/g,
                 selector: '#os_player > iframe, #video_player_html5_api',
                 hoster: cBsHandler.getHoster(2, true),
             },
