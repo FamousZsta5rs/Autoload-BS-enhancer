@@ -1,7 +1,7 @@
-====================================================
-                AUTOLOAD-BS enhancer
-====================================================
-           - modified by FamousZstra5rs -
+============================================================
+AUTOLOAD-BS enhancer (modified version of BETSLIX by xtrars)
+============================================================
+           
 
 
 ORIGINAL SCRIPT / CREDITS
@@ -43,24 +43,20 @@ Requirements:
 - Browser: Chrome, Firefox, or Edge
 - Userscript Manager:
   * [Tampermonkey](https://www.tampermonkey.net/) (recommended)
-  * Violentmonkey
+  * [Violentmonkey](https://violentmonkey.github.io/)
 
 Steps:
 1. Install a userscript manager
-2. Create a new script
-3. Paste the script from this repository
-4. Save the script
-5. Reload the streaming page
-
-
-
+2. Install script ["Autoload - BS enhancer.user.js"](https://raw.githubusercontent.com/FamousZsta5rs/Autoload-BS-enhancer/main/Autoload%20-%20BS%20enhancer.user.js)
+3. Follow Tampermonkey steps
+4. Reload the streaming page
 
 
 MODIFICATIONS
 ----------------------------------------
 Changes made in this version:
-- Adjusted autoload / autoplay behavior
-- Improvements for specific hosters
+- Adjusted/Fixed autoload / autoplay behavior
+- Improvements for specific hoster: VOE
 - Stability fixes and minor bug corrections
 - Custom adjustments for personal use
 
@@ -69,7 +65,7 @@ Most of the core functionality still comes from the original script.
 
 NOTES
 ----------------------------------------
-- The script depends heavily on the structure of streaming websites
+- The script depends heavily on the structure of streaming websites and hosters
 - Website changes may break functionality
 - This is a convenience / automation script
 
