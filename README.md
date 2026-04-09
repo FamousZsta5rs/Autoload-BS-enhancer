@@ -55,8 +55,9 @@ INSTALLATION
 Requirements:
 - Browser: Chrome, Firefox, or Edge
 - Userscript Manager:
-  * [Tampermonkey](https://www.tampermonkey.net/) (recommended)
-  * [Violentmonkey](https://violentmonkey.github.io/)
+  * [Tampermonkey](https://www.tampermonkey.net/) <img width="15" height="15" alt="grafik" src="https://github.com/user-attachments/assets/9ddb5adc-6457-4dad-a596-6f0ab825865f" /> (recommended)
+  * [Violentmonkey](https://violentmonkey.github.io/) <img width="15" height="15" alt="grafik" src="https://github.com/user-attachments/assets/2fd87560-1846-4269-87a8-8b3f0b306e33" />
+
 
 Steps:
 1. Install a userscript manager
@@ -84,9 +85,9 @@ Choose an episode and watch magic - Enjoy! :)
 ADDITIONAL FUNCTIONS FOR BURNING SERIES
 ----------------------------------------
 For an even better experience on burning series you can use this scripts/addons:
-- [BS Favorites](https://greasyfork.org/de/scripts/375098-bs-favorites) (Script)
-- [uBlock Origin](https://github.com/gorhill/ublock) <img width="20" height="20" alt="grafik" src="https://github.com/user-attachments/assets/8fdcb9d6-bda8-435b-93a3-24cbabbc06f0" /> (Addon)
-- [Buster: Captcha Solver for Humans](https://github.com/dessant/buster) <img width="20" height="20" alt="grafik" src="https://github.com/user-attachments/assets/47df557a-bbbd-4306-95dc-ca4bb8794830" /> (Addon)
+- [BS Favorites](https://greasyfork.org/de/scripts/375098-bs-favorites) <img width="15" height="15" alt="grafik" src="https://github.com/user-attachments/assets/7a6c920b-8073-4f75-b3a5-827614252025" /> (Script)
+- [uBlock Origin](https://github.com/gorhill/ublock) <img width="15" height="15" alt="grafik" src="https://github.com/user-attachments/assets/8fdcb9d6-bda8-435b-93a3-24cbabbc06f0" /> (Addon)
+- [Buster: Captcha Solver for Humans](https://github.com/dessant/buster) <img width="15" height="15" alt="grafik" src="https://github.com/user-attachments/assets/47df557a-bbbd-4306-95dc-ca4bb8794830" /> (Addon)
 
 **Use at your own risk!**
 
