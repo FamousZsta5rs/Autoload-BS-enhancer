@@ -1,65 +1,80 @@
-# Autoload
+====================================================
+                AUTOLOAD-BS enhancer
+====================================================
+           - modified by FamousZstra5rs -
 
-#Description
 
+ORIGINAL SCRIPT / CREDITS
+----------------------------------------
+Based on:
+BETSLIX - burning series enhancer
+
+Source:
+https://greasyfork.org/de/scripts/429666-betslix-burning-series-enhancer
+
+The original author created the core logic and structure.
+The donation option inside the script remains unchanged to support the original author.
+
+
+DESCRIPTION
+----------------------------------------
 This userscript enhances the streaming experience on series websites by automating common actions.
 
-The script provides features such as:
-
-Automatic video playback
-Automatic loading of the next episode
-Reduced manual interaction (fewer clicks)
-Overall smoother and faster navigation
+Features:
+- Automatic video playback
+- Automatic loading of the next episode
+- Reduced manual interaction (fewer clicks)
+- Smoother and faster navigation with integrated player
 
 The goal is to eliminate repetitive actions and improve usability while watching series.
 
-Supported Websites
 
-This script is primarily designed for:
+SUPPORTED WEBSITES
+----------------------------------------
+- burningseries / bs.to
 
-burningseries / bs.to (and similar mirror/hoster-based sites)
+- Similar mirror and hoster-based sites
+  (Note: Behavior may vary depending on the streamingsite.)
 
-Behavior may vary depending on the video hoster, as each site is structured differently.
 
-Installation
-Requirements
-Browser: Chrome, Firefox, or Edge
-Userscript manager:
-Tampermonkey (recommended)
-or
-Violentmonkey
-Steps
-Install a userscript manager (Tampermonkey recommended)
-Create a new script
-Paste the content of this repository
-Save the script
-Reload the streaming page
+INSTALLATION
+----------------------------------------
+Requirements:
+- Browser: Chrome, Firefox, or Edge
+- Userscript Manager:
+  * [Tampermonkey](https://www.tampermonkey.net/) (recommended)
+  * Violentmonkey
 
-Alternative:
+Steps:
+1. Install a userscript manager
+2. Create a new script
+3. Paste the script from this repository
+4. Save the script
+5. Reload the streaming page
 
-Install directly via the GitHub “Raw” file (if enabled)
-Original Script / Credits
 
-This project is based on the original script:
 
-BETSLIX - burning series enhancer
-Source: https://greasyfork.org/de/scripts/429666-betslix-burning-series-enhancer
 
-The original author created the core functionality and structure.
-The donation option inside the script is intentionally kept unchanged to support the original author.
 
-Modifications
+MODIFICATIONS
+----------------------------------------
+Changes made in this version:
+- Adjusted autoload / autoplay behavior
+- Improvements for specific hosters
+- Stability fixes and minor bug corrections
+- Custom adjustments for personal use
 
-The following changes were made:
+Most of the core functionality still comes from the original script.
 
-Adjusted autoload / autoplay behavior
-Improvements for specific hosters
-Stability fixes and small bug corrections
-Personal customization for specific use cases
 
-The core logic and most parts of the script still originate from the original project.
+NOTES
+----------------------------------------
+- The script depends heavily on the structure of streaming websites
+- Website changes may break functionality
+- This is a convenience / automation script
 
-Notes
-The script heavily depends on the structure of the streaming websites
-Changes to those websites may break functionality
-This is a convenience/automation script, not a guaranteed solution
+
+DISCLAIMER
+----------------------------------------
+Use at your own risk.
+No guarantees for functionality, stability, or compatibility.
