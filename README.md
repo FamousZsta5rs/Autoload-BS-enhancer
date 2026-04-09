@@ -1,5 +1,5 @@
 ---
-# Autoload - BS-enhancer
+# Autoload - BS-enhancer <img width="25" height="25" alt="grafik" src="https://github.com/user-attachments/assets/5c537567-db7f-4c1d-aa1b-7ce51c21d529" />
 ---
 
 
