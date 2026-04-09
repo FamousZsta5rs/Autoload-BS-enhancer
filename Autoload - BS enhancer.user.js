@@ -6,7 +6,7 @@
 // @modifiedBy     FamousZsta5rs
 // @description:de Wechselt automatisch zum VOE- oder Streamtape-Tab auf burning series und öffnet VOE oder Streamtape. Das Tool startet das nächste Video und falls nötig die nächste Staffel, wenn eine Episode beendet wurde.
 // @description:en Automatically switches to the VOE or Streamtape tab on burning series and opens VOE or Streamtape. The tool starts the next video and if necessary the next season when an episode is finished.
-// @version        17.1
+// @version        17.2
 // @run-at         document-start
 // @license        GPL-3.0-or-later
 // @namespace      https://github.com/FamousZsta5rs
@@ -2035,6 +2035,7 @@ await (async () => {
             oVideoElement.muted = true;
             oVideoElement.defaultMuted = true;
             oVideoElement.playsInline = true;
+
         } else if (oHoster.hoster === this.getHoster(1, true)) {
             await new Promise(resolve => {
                 document.addEventListener('DOMContentLoaded', () => resolve(), false);
@@ -2043,33 +2044,47 @@ await (async () => {
             window.location.replace(oVideo.src);
 
         } else if (oHoster.hoster === this.getHoster(2, true)) {
-            if (/https:\/\/.*\.[a-z]{2,3}\/d\//.test(document.location.href)) {
-                window.location.replace(oVideo.src);
-            }
+              if (/https:\/\/.*\.[a-z]{2,3}\/d\//.test(document.location.href)) {
+        window.location.replace(oVideo.src);
+        return;
+    }
 
-            // im embedded mode
-            await new Promise(resolve => {
-                setTimeout(() => resolve(), 5000);
-                window.addEventListener('load', async () => resolve(), false);
-            });
-            let oVideoElement = await this.waitForElement('.video-js > video').catch(() => null);
+    await new Promise(resolve => {
+        setTimeout(resolve, 5000);
+        window.addEventListener('load', async () => resolve(), false);
+    });
 
+    let oVideoElement = await this.waitForElement('#video_player_html5_api').catch(() => null);
+    if (!oVideoElement) return;
 
-            // Seite bereinigen
-            document.body.innerHTML = '';
-            document.body.append(oVideoElement);
-            window.addEventListener('click', (event) => {
-                event.stopImmediatePropagation();
-                event.preventDefault();
-            }, true);
+    const clickNoThanks = () => {
+        const btn = document.querySelector('#no_thanks');
+        if (!btn) return false;
 
-            oVideoElement.controls = true;
-            oVideoElement.preload = true;
-            oVideoElement.autoplay = true;
-            oVideoElement.muted = true;
-            oVideoElement.defaultMuted = true;
-            oVideoElement.playsInline = true;
-        } else if (oHoster.hoster === this.getHoster(3, true)) {
+        btn.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true }));
+        btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, button: 0 }));
+        btn.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, button: 0 }));
+        btn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 }));
+        btn.click();
+
+        return true;
+    };
+
+    clickNoThanks();
+    setTimeout(clickNoThanks, 300);
+    setTimeout(clickNoThanks, 800);
+    setTimeout(clickNoThanks, 1500);
+
+    oVideoElement.controls = true;
+    oVideoElement.preload = 'auto';
+    oVideoElement.autoplay = true;
+    oVideoElement.muted = true;
+    oVideoElement.defaultMuted = true;
+    oVideoElement.playsInline = true;
+
+    oVideoElement.play().catch(() => null);
+
+} else if (oHoster.hoster === this.getHoster(3, true)) {
             await new Promise(resolve => {
                 window.addEventListener('load', async () => {
                     await this.waitForElement(oHoster.selector + '[src]').catch(() => null);
@@ -2298,8 +2313,8 @@ await (async () => {
                 m3u8Regex: /(?<=sources = {([ \n]|.)*?hls': ')https:\/\/.*(?=',)/g,
             },
             {
-                regex: /^https:\/\/(playmogo)|(dood)|(ds2play)|(d[0o]+d)\.[a-z]{2,3}\//g,
-                selector: '#os_player > iframe, #video_player_html5_api',
+                regex: /^https:\/\/(playmogo|dood|ds2play|d[0o]+d)\.[a-z]{2,3}\//g,
+                selector: '#video_player_html5_api',
                 hoster: cBsHandler.getHoster(2, true),
             },
             {
