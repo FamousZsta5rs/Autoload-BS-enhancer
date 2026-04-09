@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           Autoload - BS-enhancer
+// @name           Autoload - BS enhancer
 
 // @icon           https://bs.to/favicon.ico
 // @author         xtrars
