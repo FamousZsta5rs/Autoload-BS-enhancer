@@ -6,7 +6,7 @@
 // @modifiedBy     FamousZsta5rs
 // @description:de Wechselt automatisch zum VOE- oder Streamtape-Tab auf burning series und öffnet VOE oder Streamtape. Das Tool startet das nächste Video und falls nötig die nächste Staffel, wenn eine Episode beendet wurde.
 // @description:en Automatically switches to the VOE or Streamtape tab on burning series and opens VOE or Streamtape. The tool starts the next video and if necessary the next season when an episode is finished.
-// @version        17.2
+// @version        17.3
 // @run-at         document-start
 // @license        GPL-3.0-or-later
 // @namespace      https://github.com/FamousZsta5rs
@@ -985,8 +985,8 @@ class CBurningSeriesHandler extends CBaseHandler {
                 <div  class="xtrars-donation-container">
                     <div class="xtrars-donation-text">
                         <span style="font-weight: bold;">Autoload - BS enhancer (modified version of BETSLIX by xtrars)</span> <br> 
-                        Author: Du magst meine Arbeit und das Projekt erleichtert dir dein Streaming-Leben? 
-                        Dann gib mir doch ein leckeren Tee oder Kaffe aus, denn so kann das Projekt immer weiter optimiert werden
+                        Autor: Du magst meine Arbeit und das Projekt erleichtert dir dein Streaming-Leben? 
+                        Dann gib mir doch ein leckeren Tee aus, denn so kann das Projekt immer weiter optimiert werden
                         und am Leben bleiben:
                         <a class="xtrars-donate" href="https://paypal.me/betslix" 
                             target="_blank">Spenden</a>
@@ -1861,11 +1861,11 @@ class CStreamingHandler extends CBaseHandler {
         }
     }
 
-    /**
+/**
      Waits for the local video object to become available and sets up event listeners to enable keyboard shortcuts.
-     */
-    async handleLocalVideo() {
-        let oVideo = await this.waitForElement('html head ~ body video').catch(() => null);
+ */
+async handleLocalVideo() {
+    let oVideo = await this.waitForElement('html head ~ body video').catch(() => null);
 
         // Fängt Event ab und verhindert, dass untergeordnete Elemente auf das Event reagieren können (somit werden Popups verhindert)
         window.addEventListener('click', (o) => {
@@ -1878,51 +1878,51 @@ class CStreamingHandler extends CBaseHandler {
             o.stopImmediatePropagation();
         }, true);
 
-        let oWarningWindow = document.getElementById('xtrars-warning-window');
+    let oWarningWindow = document.getElementById('xtrars-warning-window');
 
         document.localVideo = oVideo;
 
-        // Ende überspringen
-        let iIndex = 0;
-        oVideo.addEventListener('timeupdate', () => {
-            if (oWarningWindow && iIndex > 2) {
-                oWarningWindow.style.display = "none";
-            }
-            iIndex++;
+    // Ende überspringen
+    let iIndex = 0;
+    oVideo.addEventListener('timeupdate', () => {
+        if (oWarningWindow && iIndex > 2) {
+            oWarningWindow.style.display = "none";
+        }
+        iIndex++;
 
             if (oVideo.currentTime + (GM_getValue('bSkipEnd') ? (GM_getValue('iSkipEndTime') ?? 1) : 1) >= oVideo.duration) {
-                GM_setValue('isLocalVideoEnded', true);
-                window.close();
-            }
-        });
+            GM_setValue('isLocalVideoEnded', true);
+            window.close();
+        }
+    });
 
-        oVideo.addEventListener('play', () => {
-            this.#bIsPlaying = true;
-            let oWarningWindow = document.getElementById('xtrars-warning-window');
-            if (oWarningWindow) {
-                oWarningWindow.style.display = "none";
-            }
-        });
+    oVideo.addEventListener('play', () => {
+        this.#bIsPlaying = true;
+        let oWarningWindow = document.getElementById('xtrars-warning-window');
+        if (oWarningWindow) {
+            oWarningWindow.style.display = "none";
+        }
+    });
 
-        oVideo.addEventListener('loadeddata', () => {
-            this.applyShortcuts();
+    oVideo.addEventListener('loadeddata', () => {
+        this.applyShortcuts();
             oVideo.currentTime = 0;
 
-            if (GM_getValue('bSkipStart') && GM_getValue('iSkipStartTime')) {
-                oVideo.currentTime = GM_getValue('iSkipStartTime');
-            }
+        if (GM_getValue('bSkipStart') && GM_getValue('iSkipStartTime')) {
+            oVideo.currentTime = GM_getValue('iSkipStartTime');
+        }
 
-            if (!GM_getValue('bSkipEnd') || GM_getValue('iSkipEndTime') >= oVideo.duration) {
-                oVideo.addEventListener('waiting', () => {
+        if (!GM_getValue('bSkipEnd') || GM_getValue('iSkipEndTime') >= oVideo.duration) {
+            oVideo.addEventListener('waiting', () => {
                     if (oVideo.currentTime + (GM_getValue('bSkipEnd') ? (GM_getValue('iSkipEndTime') ?? 1) : 1) >= oVideo.duration) {
-                        setTimeout(() => {
-                            GM_setValue('isLocalVideoEnded', true);
-                            window.close();
+                    setTimeout(() => {
+                        GM_setValue('isLocalVideoEnded', true);
+                        window.close();
                         }, 2e3);
-                    }
-                });
-            }
-        });
+                }
+            });
+        }
+    });
 
         // Erlaube Fullscreen durch Doppelklick
         window.addEventListener('dblclick', () => {
@@ -1943,40 +1943,23 @@ class CStreamingHandler extends CBaseHandler {
         document.body.style.margin = "0px";
         document.body.style.backgroundColor = "black";
         document.body.style.overflow = "hidden";
-
         oVideo.requestFullscreen().catch(() => null);
-
-oVideo.muted = true;
-oVideo.defaultMuted = true;
-oVideo.playsInline = true;
-oVideo.autoplay = true;
-
-oVideo.play().then(() => {
-    // optional: Ton nach Start wieder einschalten
-    setTimeout(() => {
-        oVideo.muted = false;
-    }, 1000);
-}).catch(() => {
-    // Autoplay wurde blockiert
-    this.showAutoplayWarning();
-});        
-        
-        /*oVideo.requestFullscreen().catch(() => null);
 
         oVideo.play().catch(() => {
             // Autoplay wurde blockiert
-            this.showAutoplayWarning();
-        }); */
-    }
+        this.showAutoplayWarning();
+    });
+}
 
     /**
      Sets the behavior of the video stream based on the hoster and video source
      @async
-     @param {object} oHoster - The hoster object containing information on the hoster and its regular expression for
-      matching the m3u8 video url
+     @param {object} oHoster - The hoster object containing information on the hoster and its regular expression for matching the m3u8 video url
      @param {object} oVideo - The video object whose behavior is being set
      @returns {void}
      */
+
+
     async setStreamBehavior(oHoster, oVideo) {
         if (oHoster.hoster === this.getHoster(0, true)) {
 
@@ -2044,45 +2027,68 @@ await (async () => {
             window.location.replace(oVideo.src);
 
         } else if (oHoster.hoster === this.getHoster(2, true)) {
-              if (/https:\/\/.*\.[a-z]{2,3}\/d\//.test(document.location.href)) {
-        window.location.replace(oVideo.src);
-        return;
+
+    // Aussenseite
+    if (location.pathname.includes('/d/')) {
+        const iframe = document.querySelector('#os_player > iframe');
+        if (iframe?.src) {
+            location.replace(iframe.src);
+            return;
+        }
     }
 
-    await new Promise(resolve => {
-        setTimeout(resolve, 5000);
-        window.addEventListener('load', async () => resolve(), false);
-    });
+    // Innenseite
+    const video = await this.waitForElement('#video_player_html5_api').catch(() => null);
+    if (!video) return;
 
-    let oVideoElement = await this.waitForElement('#video_player_html5_api').catch(() => null);
-    if (!oVideoElement) return;
-
-    const clickNoThanks = () => {
+    // --- Resume Popup behandeln ---
+    const handleResumePopup = () => {
         const btn = document.querySelector('#no_thanks');
-        if (!btn) return false;
+        if (btn) {
+            btn.click();
+        }
 
-        btn.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true }));
-        btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, button: 0 }));
-        btn.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, button: 0 }));
-        btn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 }));
-        btn.click();
-
-        return true;
+        document.querySelectorAll('#checkresume_div, #checkresume_div_n, #no_thanks')
+            .forEach(el => el.remove());
     };
 
-    clickNoThanks();
-    setTimeout(clickNoThanks, 300);
-    setTimeout(clickNoThanks, 800);
-    setTimeout(clickNoThanks, 1500);
+    // einmal direkt versuchen
+    handleResumePopup();
 
-    oVideoElement.controls = true;
-    oVideoElement.preload = 'auto';
-    oVideoElement.autoplay = true;
-    oVideoElement.muted = true;
-    oVideoElement.defaultMuted = true;
-    oVideoElement.playsInline = true;
+    // kurze Zeit weiter überwachen (wichtig!)
+    const observer = new MutationObserver(handleResumePopup);
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 
-    oVideoElement.play().catch(() => null);
+    // kleine Verzögerung, damit src sicher gesetzt ist
+    await new Promise(r => setTimeout(r, 500));
+
+    const src = video.currentSrc || video.src;
+    if (!src) return;
+
+    const wrapper = document.querySelector('#video_player');
+    if (!wrapper) return;
+
+    try { video.pause(); } catch {}
+
+    wrapper.innerHTML = '';
+
+    const myVideo = document.createElement('video');
+    myVideo.src = src;
+    myVideo.controls = true;
+    myVideo.autoplay = true;
+    myVideo.preload = 'auto';
+    myVideo.playsInline = true;
+    myVideo.style.width = '100%';
+    myVideo.style.height = '100%';
+    myVideo.style.background = '#000';
+
+    wrapper.appendChild(myVideo);
+
+    // Observer wieder stoppen (sauber)
+    observer.disconnect();
 
 } else if (oHoster.hoster === this.getHoster(3, true)) {
             await new Promise(resolve => {
