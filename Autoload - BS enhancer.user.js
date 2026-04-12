@@ -42,7 +42,7 @@
 
 // @match          https://*.voe-network.net/*
 // @match          https://voe.sx/*
-// @match          https://*.jessicaclearout.com/*
+// @match          https://*.marissasharecareer.com/*
 
 // @require        https://unpkg.com/video.js@latest/dist/video.min.js
 // @require        https://unpkg.com/hls.js@latest/dist/hls.min.js
@@ -165,18 +165,18 @@ class CBurningSeriesHandler extends CBaseHandler {
      */
     initGMVariables() {
         const oVariables = [
-            {name: 'bActivateEnhancer', defaultValue: false},
-            {name: 'bAutoplayNextSeason', defaultValue: true},
-            {name: 'bAutoplayRandomEpisode', defaultValue: false},
-            {name: 'bSelectHoster', defaultValue: this.getHoster(0, true)},
-            {name: 'bSkipStart', defaultValue: false},
-            {name: 'bSkipEnd', defaultValue: false},
-            {name: 'iSkipEndTime', defaultValue: 0},
-            {name: 'iSkipStartTime', defaultValue: 0},
-            {name: 'bFirstStart', defaultValue: true},
-            {name: 'sLastActiveTab', defaultValue: ''},
-            {name: 'bIsSettingsWindowOpen', defaultValue: false},
-            {name: 'oSettingsWindowPosition', defaultValue: {}}
+            { name: 'bActivateEnhancer', defaultValue: false },
+            { name: 'bAutoplayNextSeason', defaultValue: true },
+            { name: 'bAutoplayRandomEpisode', defaultValue: false },
+            { name: 'bSelectHoster', defaultValue: this.getHoster(0, true) },
+            { name: 'bSkipStart', defaultValue: false },
+            { name: 'bSkipEnd', defaultValue: false },
+            { name: 'iSkipEndTime', defaultValue: 0 },
+            { name: 'iSkipStartTime', defaultValue: 0 },
+            { name: 'bFirstStart', defaultValue: true },
+            { name: 'sLastActiveTab', defaultValue: '' },
+            { name: 'bIsSettingsWindowOpen', defaultValue: false },
+            { name: 'oSettingsWindowPosition', defaultValue: {} }
         ];
 
         for (const o of oVariables) {
@@ -1099,8 +1099,8 @@ class CBurningSeriesHandler extends CBaseHandler {
             this.restartAnimation(oSettingsWindow);
         }
 
-        document.addEventListener("touchmove", this.drag, {passive: false});
-        document.addEventListener("mousemove", this.drag, {passive: false});
+        document.addEventListener("touchmove", this.drag, { passive: false });
+        document.addEventListener("mousemove", this.drag, { passive: false });
 
         GM_setValue('bIsSettingsWindowOpen', true);
         GM_setValue('oSettingsWindowPosition', {
@@ -1158,7 +1158,7 @@ class CBurningSeriesHandler extends CBaseHandler {
                 this.showTabContent(e.target.dataset.tab);
             });
         });
-        
+
         // Öffne Settings
         !oButton || oButton.addEventListener('click', () => {
 
@@ -1177,16 +1177,16 @@ class CBurningSeriesHandler extends CBaseHandler {
                     GM_setValue('bFirstStart', false);
                     document.getElementsByClassName('xtrars-switch')[0].style.animation = 'shake 1s ease 1s 1 normal;'
                 }
-                document.addEventListener("touchmove", this.drag, {passive: false});
-                document.addEventListener("mousemove", this.drag, {passive: false});
+                document.addEventListener("touchmove", this.drag, { passive: false });
+                document.addEventListener("mousemove", this.drag, { passive: false });
             }
         });
 
-        !oToolbar || oToolbar.addEventListener("touchstart", this.dragStart, {passive: false});
-        !oToolbar || oToolbar.addEventListener("mousedown", this.dragStart, {passive: false});
-        document.addEventListener("touchend", this.dragEnd, {passive: false});
-        document.addEventListener("mouseup", this.dragEnd, {passive: false});
-        document.addEventListener("contextmenu", this.dragEnd, {passive: false});
+        !oToolbar || oToolbar.addEventListener("touchstart", this.dragStart, { passive: false });
+        !oToolbar || oToolbar.addEventListener("mousedown", this.dragStart, { passive: false });
+        document.addEventListener("touchend", this.dragEnd, { passive: false });
+        document.addEventListener("mouseup", this.dragEnd, { passive: false });
+        document.addEventListener("contextmenu", this.dragEnd, { passive: false });
 
         // Schließe Settings
         if (document.getElementById('xtrars-settings-close-btn')) {
@@ -1459,10 +1459,21 @@ class CBurningSeriesHandler extends CBaseHandler {
             if (regexHoster.test(sActiveTab)) {
                 let oIframe = await this.waitForElement('section.serie .hoster-player > iframe');
                 let sSrc = oIframe.src;
-                window.open(sSrc, '_blank').focus();
-                oIframe.remove();
-                let oHosterPlayer = await this.waitForElement('.hoster-player');
-                oHosterPlayer.innerHTML = `
+                const sDebugId = 'autobs_' + Date.now();
+
+                const oNewTab = window.open('about:blank', '_blank');
+                if (oNewTab) {
+                    oNewTab.name = sDebugId;
+                    oNewTab.location.href = sSrc;
+
+                    try {
+                        oNewTab.focus();
+                    } catch { }
+
+                    oIframe.remove();
+
+                    let oHosterPlayer = await this.waitForElement('.hoster-player');
+                    oHosterPlayer.innerHTML = `
                     <h2 class="">Dein Stream ist jetzt bereit</h2>
                     <div class="play" style="display: none;"></div>
                     <div class="loading" style="display: none;">
@@ -1484,6 +1495,8 @@ class CBurningSeriesHandler extends CBaseHandler {
                     </div>
                     <a href="${sSrc}" target="_blank" rel="noreferrer">${sSrc}</a>
                 `;
+                }
+
                 break;
             }
         }
@@ -1861,11 +1874,57 @@ class CStreamingHandler extends CBaseHandler {
         }
     }
 
-/**
-     Waits for the local video object to become available and sets up event listeners to enable keyboard shortcuts.
- */
-async handleLocalVideo() {
+    /**
+         Waits for the local video object to become available and sets up event listeners to enable keyboard shortcuts.
+     */
+    async handleLocalVideo() {
     let oVideo = await this.waitForElement('html head ~ body video').catch(() => null);
+    if (!oVideo) return;
+
+    let oCloseWindow = window;
+    try {
+        if (window.top && window.top !== window) {
+            oCloseWindow = window.top;
+        }
+    } catch {}
+
+    let sWindowName = '';
+    try {
+        sWindowName = oCloseWindow.name || window.name || '';
+    } catch {
+        sWindowName = window.name || '';
+    }
+
+    const isAutoBsTab = sWindowName.startsWith('autobs_');
+
+    let bVideoEndedHandled = false;
+    const finishEpisode = () => {
+        if (bVideoEndedHandled) return;
+        bVideoEndedHandled = true;
+
+        GM_setValue('isLocalVideoEnded', true);
+
+        try {
+            oCloseWindow.close();
+        } catch {}
+
+        if (isAutoBsTab) {
+            setTimeout(() => {
+                try {
+                    oCloseWindow.open('', '_self');
+                    oCloseWindow.close();
+                } catch {}
+            }, 100);
+        }
+
+        setTimeout(() => {
+            try {
+                if (!oCloseWindow.closed) {
+                    oCloseWindow.location.href = 'about:blank';
+                }
+            } catch {}
+        }, 1000);
+    };
 
         // Fängt Event ab und verhindert, dass untergeordnete Elemente auf das Event reagieren können (somit werden Popups verhindert)
         window.addEventListener('click', (o) => {
@@ -1878,51 +1937,49 @@ async handleLocalVideo() {
             o.stopImmediatePropagation();
         }, true);
 
-    let oWarningWindow = document.getElementById('xtrars-warning-window');
+        let oWarningWindow = document.getElementById('xtrars-warning-window');
 
         document.localVideo = oVideo;
 
-    // Ende überspringen
-    let iIndex = 0;
-    oVideo.addEventListener('timeupdate', () => {
-        if (oWarningWindow && iIndex > 2) {
-            oWarningWindow.style.display = "none";
-        }
-        iIndex++;
+        // Ende überspringen
+        let iIndex = 0;
+        oVideo.addEventListener('timeupdate', () => {
+            if (oWarningWindow && iIndex > 2) {
+                oWarningWindow.style.display = "none";
+            }
+            iIndex++;
 
             if (oVideo.currentTime + (GM_getValue('bSkipEnd') ? (GM_getValue('iSkipEndTime') ?? 1) : 1) >= oVideo.duration) {
-            GM_setValue('isLocalVideoEnded', true);
-            window.close();
-        }
-    });
+                finishEpisode();
+            }
+        });
 
-    oVideo.addEventListener('play', () => {
-        this.#bIsPlaying = true;
-        let oWarningWindow = document.getElementById('xtrars-warning-window');
-        if (oWarningWindow) {
-            oWarningWindow.style.display = "none";
-        }
-    });
+        oVideo.addEventListener('play', () => {
+            this.#bIsPlaying = true;
+            let oWarningWindow = document.getElementById('xtrars-warning-window');
+            if (oWarningWindow) {
+                oWarningWindow.style.display = "none";
+            }
+        });
 
-    oVideo.addEventListener('loadeddata', () => {
-        this.applyShortcuts();
+        oVideo.addEventListener('loadeddata', () => {
+            this.applyShortcuts();
             oVideo.currentTime = 0;
 
-        if (GM_getValue('bSkipStart') && GM_getValue('iSkipStartTime')) {
-            oVideo.currentTime = GM_getValue('iSkipStartTime');
-        }
+            if (GM_getValue('bSkipStart') && GM_getValue('iSkipStartTime')) {
+                oVideo.currentTime = GM_getValue('iSkipStartTime');
+            }
 
-        if (!GM_getValue('bSkipEnd') || GM_getValue('iSkipEndTime') >= oVideo.duration) {
-            oVideo.addEventListener('waiting', () => {
+            if (!GM_getValue('bSkipEnd') || GM_getValue('iSkipEndTime') >= oVideo.duration) {
+                oVideo.addEventListener('waiting', () => {
                     if (oVideo.currentTime + (GM_getValue('bSkipEnd') ? (GM_getValue('iSkipEndTime') ?? 1) : 1) >= oVideo.duration) {
-                    setTimeout(() => {
-                        GM_setValue('isLocalVideoEnded', true);
-                        window.close();
+                        setTimeout(() => {
+                            finishEpisode();
                         }, 2e3);
-                }
-            });
-        }
-    });
+                    }
+                });
+            }
+        });
 
         // Erlaube Fullscreen durch Doppelklick
         window.addEventListener('dblclick', () => {
@@ -1947,9 +2004,9 @@ async handleLocalVideo() {
 
         oVideo.play().catch(() => {
             // Autoplay wurde blockiert
-        this.showAutoplayWarning();
-    });
-}
+            this.showAutoplayWarning();
+        });
+    }
 
     /**
      Sets the behavior of the video stream based on the hoster and video source
@@ -1970,35 +2027,35 @@ async handleLocalVideo() {
 
             const btn = await this.waitForElement(oHoster.selector);
 
-// kompletter „Fake Klick“
-if (!btn.dataset.clicked) {
-    btn.dataset.clicked = "1";
-    
-btn.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true }));
-btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, button: 0 }));
-btn.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, button: 0 }));
-btn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 }));
+            // kompletter „Fake Klick“
+            if (!btn.dataset.clicked) {
+                btn.dataset.clicked = "1";
 
-// fallback
-btn.click();
-}
+                btn.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true }));
+                btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, button: 0 }));
+                btn.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, button: 0 }));
+                btn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 }));
 
-// optional kleiner Delay (wichtig!)
-const video = await this.waitForElement('video');
+                // fallback
+                btn.click();
+            }
 
-await (async () => {
-    const start = Date.now();
-    while (Date.now() - start < 10000) {
-        if (
-            video &&
-            (video.currentSrc || video.src) &&
-            video.readyState >= 2
-        ) {
-            return;
-        }
-        await new Promise(r => setTimeout(r, 200));
-    }
-})();
+            // optional kleiner Delay (wichtig!)
+            const video = await this.waitForElement('video');
+
+            await (async () => {
+                const start = Date.now();
+                while (Date.now() - start < 10000) {
+                    if (
+                        video &&
+                        (video.currentSrc || video.src) &&
+                        video.readyState >= 2
+                    ) {
+                        return;
+                    }
+                    await new Promise(r => setTimeout(r, 200));
+                }
+            })();
             let oVideoElement = await this.waitForElement(oHoster.selector).catch(() => null);
 
             // Seite bereinigen
@@ -2015,7 +2072,6 @@ await (async () => {
             oVideoElement.controls = true;
             oVideoElement.preload = true;
             oVideoElement.autoplay = true;
-            oVideoElement.muted = true;
             oVideoElement.defaultMuted = true;
             oVideoElement.playsInline = true;
 
@@ -2028,69 +2084,69 @@ await (async () => {
 
         } else if (oHoster.hoster === this.getHoster(2, true)) {
 
-    // Aussenseite
-    if (location.pathname.includes('/d/')) {
-        const iframe = document.querySelector('#os_player > iframe');
-        if (iframe?.src) {
-            location.replace(iframe.src);
-            return;
-        }
-    }
+            // Aussenseite
+            if (location.pathname.includes('/d/')) {
+                const iframe = document.querySelector('#os_player > iframe');
+                if (iframe?.src) {
+                    location.replace(iframe.src);
+                    return;
+                }
+            }
 
-    // Innenseite
-    const video = await this.waitForElement('#video_player_html5_api').catch(() => null);
-    if (!video) return;
+            // Innenseite
+            const video = await this.waitForElement('#video_player_html5_api').catch(() => null);
+            if (!video) return;
 
-    // --- Resume Popup behandeln ---
-    const handleResumePopup = () => {
-        const btn = document.querySelector('#no_thanks');
-        if (btn) {
-            btn.click();
-        }
+            // --- Resume Popup behandeln ---
+            const handleResumePopup = () => {
+                const btn = document.querySelector('#no_thanks');
+                if (btn) {
+                    btn.click();
+                }
 
-        document.querySelectorAll('#checkresume_div, #checkresume_div_n, #no_thanks')
-            .forEach(el => el.remove());
-    };
+                document.querySelectorAll('#checkresume_div, #checkresume_div_n, #no_thanks')
+                    .forEach(el => el.remove());
+            };
 
-    // einmal direkt versuchen
-    handleResumePopup();
+            // einmal direkt versuchen
+            handleResumePopup();
 
-    // kurze Zeit weiter überwachen (wichtig!)
-    const observer = new MutationObserver(handleResumePopup);
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+            // kurze Zeit weiter überwachen (wichtig!)
+            const observer = new MutationObserver(handleResumePopup);
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
 
-    // kleine Verzögerung, damit src sicher gesetzt ist
-    await new Promise(r => setTimeout(r, 500));
+            // kleine Verzögerung, damit src sicher gesetzt ist
+            await new Promise(r => setTimeout(r, 500));
 
-    const src = video.currentSrc || video.src;
-    if (!src) return;
+            const src = video.currentSrc || video.src;
+            if (!src) return;
 
-    const wrapper = document.querySelector('#video_player');
-    if (!wrapper) return;
+            const wrapper = document.querySelector('#video_player');
+            if (!wrapper) return;
 
-    try { video.pause(); } catch {}
+            try { video.pause(); } catch { }
 
-    wrapper.innerHTML = '';
+            wrapper.innerHTML = '';
 
-    const myVideo = document.createElement('video');
-    myVideo.src = src;
-    myVideo.controls = true;
-    myVideo.autoplay = true;
-    myVideo.preload = 'auto';
-    myVideo.playsInline = true;
-    myVideo.style.width = '100%';
-    myVideo.style.height = '100%';
-    myVideo.style.background = '#000';
+            const myVideo = document.createElement('video');
+            myVideo.src = src;
+            myVideo.controls = true;
+            myVideo.autoplay = true;
+            myVideo.preload = 'auto';
+            myVideo.playsInline = true;
+            myVideo.style.width = '100%';
+            myVideo.style.height = '100%';
+            myVideo.style.background = '#000';
 
-    wrapper.appendChild(myVideo);
+            wrapper.appendChild(myVideo);
 
-    // Observer wieder stoppen (sauber)
-    observer.disconnect();
+            // Observer wieder stoppen (sauber)
+            observer.disconnect();
 
-} else if (oHoster.hoster === this.getHoster(3, true)) {
+        } else if (oHoster.hoster === this.getHoster(3, true)) {
             await new Promise(resolve => {
                 window.addEventListener('load', async () => {
                     await this.waitForElement(oHoster.selector + '[src]').catch(() => null);
@@ -2313,7 +2369,7 @@ await (async () => {
     if (GM_getValue('bActivateEnhancer')) {
         const aHoster = [
             {
-                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/jessicaclearout\.com\/.*)/g,
+                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/marissasharecareer\.com\/.*)/g,
                 selector: 'video.jw-video',
                 hoster: cBsHandler.getHoster(0, true),
                 m3u8Regex: /(?<=sources = {([ \n]|.)*?hls': ')https:\/\/.*(?=',)/g,
