@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Autoload - BS enhancer (modified version of BETSLIX by xtrars)
 
-// @icon           https://bs.to/favicon.ico
+// @icon           https://burningseries.ac/favicon.ico
 // @author         xtrars
 // @modifiedBy     FamousZsta5rs
 // @description:de Wechselt automatisch zum VOE- oder Streamtape-Tab auf burning series und öffnet VOE oder Streamtape. Das Tool startet das nächste Video und falls nötig die nächste Staffel, wenn eine Episode beendet wurde.
@@ -44,7 +44,7 @@
 
 // @match          https://*.voe-network.net/*
 // @match          https://voe.sx/*
-// @match          https://*.marissasharecareer.com/*
+// @match          https://*.ellenpoliticalfollow.com/*
 
 // @require        https://unpkg.com/video.js@latest/dist/video.min.js
 // @require        https://unpkg.com/hls.js@latest/dist/hls.min.js
@@ -2371,7 +2371,7 @@ class CStreamingHandler extends CBaseHandler {
     if (GM_getValue('bActivateEnhancer')) {
         const aHoster = [
             {
-                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/marissasharecareer\.com\/.*)/g,
+                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/ellenpoliticalfollow\.com\/.*)/g,
                 selector: 'video.jw-video',
                 hoster: cBsHandler.getHoster(0, true),
                 m3u8Regex: /(?<=sources = {([ \n]|.)*?hls': ')https:\/\/.*(?=',)/g,
