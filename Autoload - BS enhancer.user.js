@@ -6,7 +6,7 @@
 // @modifiedBy     FamousZsta5rs
 // @description:de Wechselt automatisch zum VOE- oder Streamtape-Tab auf burning series und öffnet VOE oder Streamtape. Das Tool startet das nächste Video und falls nötig die nächste Staffel, wenn eine Episode beendet wurde.
 // @description:en Automatically switches to the VOE or Streamtape tab on burning series and opens VOE or Streamtape. The tool starts the next video and if necessary the next season when an episode is finished.
-// @version        17.3
+// @version        17.4
 // @run-at         document-start
 // @license        GPL-3.0-or-later
 // @namespace      https://github.com/FamousZsta5rs
@@ -29,6 +29,8 @@
 // @grant          window.focus
 
 // @match          https://bs.to/*
+// @match          https://burningseries.ac/*
+// @match          https://burningseries.cx/*
 
 // @match          https://doodstream.me/*
 // @match          https://*.playmogo.com/*
