@@ -46,7 +46,7 @@ Most of the core functionality still comes from the original script.
 
 SUPPORTED WEBSITES
 ----------------------------------------
-- burningseries / bs.to
+- BurningSeries
 - Similar mirror and hoster-based sites (NOTE: Behavior may vary depending on the streamingsite.)
 
 
