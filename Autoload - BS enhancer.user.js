@@ -6,7 +6,7 @@
 // @modifiedBy     FamousZsta5rs
 // @description:de Wechselt automatisch zum VOE- oder Streamtape-Tab auf burning series und öffnet VOE oder Streamtape. Das Tool startet das nächste Video und falls nötig die nächste Staffel, wenn eine Episode beendet wurde.
 // @description:en Automatically switches to the VOE or Streamtape tab on burning series and opens VOE or Streamtape. The tool starts the next video and if necessary the next season when an episode is finished.
-// @version        17.4
+// @version        17.5
 // @run-at         document-start
 // @license        GPL-3.0-or-later
 // @namespace      https://github.com/FamousZsta5rs
@@ -44,7 +44,7 @@
 
 // @match          https://*.voe-network.net/*
 // @match          https://voe.sx/*
-// @match          https://*.ellenpoliticalfollow.com/*
+// @match          https://*.caseyimpactstation.com/*
 
 // @require        https://unpkg.com/video.js@latest/dist/video.min.js
 // @require        https://unpkg.com/hls.js@latest/dist/hls.min.js
@@ -2371,7 +2371,7 @@ class CStreamingHandler extends CBaseHandler {
     if (GM_getValue('bActivateEnhancer')) {
         const aHoster = [
             {
-                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/ellenpoliticalfollow\.com\/.*)/g,
+                regex: /^(https:\/\/(v-*o-*e|[-unblock\d]){1,15}\.[a-z]{2,3}\/.*)|(https:\/\/caseyimpactstation\.com\/.*)/g,
                 selector: 'video.jw-video',
                 hoster: cBsHandler.getHoster(0, true),
                 m3u8Regex: /(?<=sources = {([ \n]|.)*?hls': ')https:\/\/.*(?=',)/g,
